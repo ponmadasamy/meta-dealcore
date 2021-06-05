@@ -1,0 +1,3 @@
+
+PREFERRED_VERSION_linux-rockchip ?= "4.19%"
+LINUXLIBCVERSION ?= "4.19%"
