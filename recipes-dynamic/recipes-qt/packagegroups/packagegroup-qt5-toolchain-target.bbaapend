@@ -1,0 +1,6 @@
+
+RDEPENDS_${PN}_append = " 
+    qtvirtualkeyboard \
+    qtvirtualkeyboard-dev \
+    qtvirtualkeyboard-mkspecs \
+"

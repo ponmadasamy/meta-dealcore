@@ -1,0 +1,13 @@
+diff --git a/scripts/Makefile.lib b/scripts/Makefile.lib
+index a384b41898..eaf86593a3 100644
+--- a/scripts/Makefile.lib
++++ b/scripts/Makefile.lib
+@@ -392,8 +392,6 @@ cmd_efi_ld = $(LD) -nostdlib -znocombreloc -T $(EFI_LDS_PATH) -shared \
+ 
+ EFI_LDS_PATH = $(srctree)/arch/$(ARCH)/lib/$(EFI_LDS)
+ 
+-$(obj)/helloworld.so: $(EFI_LDS_PATH)
+-
+ $(obj)/helloworld.so: $(obj)/helloworld.o arch/$(ARCH)/lib/$(EFI_CRT0) \
+ 		arch/$(ARCH)/lib/$(EFI_RELOC)
+ 	$(call cmd,efi_ld)

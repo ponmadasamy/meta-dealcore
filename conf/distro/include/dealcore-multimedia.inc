@@ -1,3 +1,3 @@
 
-PREFERRED_VERSION_ffmpeg = "master"
+PREFERRED_VERSION_ffmpeg = "4.4"
 LICENSE_FLAGS_WHITELIST = "commercial"

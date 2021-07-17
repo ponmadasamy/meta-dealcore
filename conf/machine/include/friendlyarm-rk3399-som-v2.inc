@@ -1,33 +1,44 @@
 
-require conf/machine/include/rk3399.inc 
-require conf/machine/include/rockchip_4.4.inc
+require rk3399.inc 
+require rk3399_image.inc
 
 MACHINE = "friendlyarm-rk3399-som-v2"
-
-KERNEL_DEVICETREE = "rockchip/friendlyarm-rk3399-som-v2.dtb"
-KBUILD_DEFCONFIG ?= "friendlyarm-rk3399-som-v2_defconfig"
-
-UBOOT_MACHINE = "friendlyarm-rk3399-som-v2_defconfig"
 
 RK_WIFIBT_FIRMWARES = " \
 	rkwifibt-firmware-ap6356-wifi \
 	rkwifibt-firmware-ap6356-bt \
-	brcm-tools \
+	rkwifi-init \
 "
 
-MACHINE_EXTRA_RRECOMMENDS_append += " \
-	linux-firmware-rk-cdndp \
+MACHINE_EXTRA_RRECOMMENDS_append = " \
+	${RK_WIFIBT_FIRMWARES} \
+	kernel-modules \
+"
+#	linux-firmware-rk-cdndp
+
+# For Wireless
+IMAGE_INSTALL_append = " \
+	iw wpa-supplicant bluez5 \
+	${MACHINE_EXTRA_RRECOMMENDS} \
 "
 
-PREFERRED_PROVIDER_virtual/kernel = "linux-rockchip"
+PREFERRED_PROVIDER_virtual/xserver = "xserver-xorg"
+PREFERRED_PROVIDER_virtual/xserver-xf86 = "xserver-xorg"
 
-# Workaround: libmali.so provided by rk having no SONAME field in it
-# so add it to fix rdepends problems
-ASSUME_SHLIBS += "libEGL.so:rockchip-libmali"
-ASSUME_SHLIBS += "libGLESv1_CM.so:rockchip-libmali"
-ASSUME_SHLIBS += "libGLESv2.so:rockchip-libmali"
-ASSUME_SHLIBS += "libOpenCL.so:rockchip-libmali"
-ASSUME_SHLIBS += "libgbm.so:rockchip-libmali"
-ASSUME_SHLIBS += "libwayland-egl.so:rockchip-libmali"
+# PREFERRED_PROVIDER_virtual/xserver = "rockchip-xserver-xorg"
+# PREFERRED_PROVIDER_virtual/xserver-xf86 = "rockchip-xserver-xorg"
+# PREFERRED_VERSION_rockchip-xserver-xorg = "1.20.4"
 
-DEFAULTTUNE_rk3399="aarch64"
+# ROCKCHIP-XSERVER-XORG = " \
+#	rockchip-xserver-xorg-extension-dri \
+#	rockchip-xserver-xorg-extension-dri2 \
+#	rockchip-xserver-xorg-extension-glx \
+# "
+
+# XSERVER = " \
+#		rockchip-xserver-xorg \
+#		xf86-input-libinput \
+#		${ROCKCHIP-XSERVER-XORG} \
+# "
+
+# PACKAGECONFIG_append_pn-rockchip-xserver = " "

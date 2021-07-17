@@ -4,14 +4,11 @@
 DESCRIPTION = "Rockchip binary loader"
 
 LICENSE = "LICENSE.rockchip"
-LIC_FILES_CHKSUM = "file://${RKBASE}/licenses/LICENSE.rockchip;md5=d63890e209bf038f44e708bbb13e4ed9"
+LIC_FILES_CHKSUM = "file://${DEALCOREBASE}/licenses/LICENSE.rockchip;md5=d63890e209bf038f44e708bbb13e4ed9"
 
 DEPENDS = "u-boot-mkimage-native rk-binary-native"
 
 PV_append = "+git${SRCPV}"
-
-inherit freeze-rev
-
 
 SRC_URI = "git://${EXTRA}/rkbin;protocol=file;usehead=1"
 SRCREV = "${AUTOREV}"

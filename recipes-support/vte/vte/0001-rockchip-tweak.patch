@@ -1,0 +1,23 @@
+From df7dd2d9eaaf39f22a5096e9e4497b810de4ec70 Mon Sep 17 00:00:00 2001
+From: Ponmadasamy Muthuraj <ponmadasamy@live.com>
+Date: Sat, 26 Jun 2021 08:51:19 +0530
+Subject: [PATCH] rockchip tweak
+
+---
+ src/pty.cc | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/src/pty.cc b/src/pty.cc
+index babb0f8..acb63d8 100644
+--- a/src/pty.cc
++++ b/src/pty.cc
+@@ -163,7 +163,8 @@ vte_pty_child_setup (VtePty *pty)
+         auto const fd_flags = int{O_RDWR | ((priv->flags & VTE_PTY_NO_CTTY) ? O_NOCTTY : 0)};
+         auto fd = int{-1};
+ 
+-#ifdef __linux__
++// #ifdef __linux__
++#if 0        /* Since kernel 4.4.194 doesnot support TIOCGPTPEER */
+         fd = ioctl(masterfd, TIOCGPTPEER, fd_flags);
+         /* Note: According to the kernel's own tests (tools/testing/selftests/filesystems/devpts_pts.c),
+          * the error returned when the running kernel does not support this ioctl should be EINVAL.
