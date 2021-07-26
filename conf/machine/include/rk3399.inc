@@ -2,10 +2,13 @@
 # Released under the MIT license (see COPYING.MIT for the terms)
 
 require conf/machine/include/soc-family.inc
-include conf/machine/include/arm/arch-armv8.inc
 include conf/machine/include/arm/arch-armv8a.inc
 
-SOC_FAMILY ?= "rk3399"
+SOC_FAMILY = "rk3399"
+DEFAULTTUNE_rk3399 = "aarch64"
+
+MACHINE_FEATURES_remove = "qemu-usermode"
+MACHINE_FEATURES_BACKFILL_CONSIDERED_append = "qemu-usermode"
 
 MALI_GPU := "midgard-t86x"
 MALI_VERSION := "r18p0"
@@ -18,15 +21,12 @@ MACHINEOVERRIDES .= ":rockchip"
 
 PREFERRED_PROVIDER_virtual/kernel = "rockchip-linux"
 PREFERRED_VERSION_rockchip-linux = "4.4%"
-LINUXLIBCVERSION = "4.4-rockchip%"
-KERNEL_DEVICETREE = "rockchip/friendlyarm-rk3399-som-v2.dtb"
-KBUILD_DEFCONFIG = "friendlyarm-rk3399-som-v2_defconfig"
+LINUXLIBCVERSION = "rockchip-linux-4.4%"
 
 RK_USE_COMPRESSED_KERNEL = "0"
 
 PREFERRED_PROVIDER_virtual/bootloader = "rockchip-uboot"
 PREFERRED_VERSION_rockchip-uboot = "2017.09"
-UBOOT_MACHINE = "friendlyarm-rk3399-som-v2_defconfig"
 
 # Custom kernel might not support newest python
 PACKAGECONFIG_remove_pn-perf += " scripting"
@@ -52,5 +52,3 @@ ASSUME_SHLIBS += "libGLESv2.so:rockchip-libmali"
 ASSUME_SHLIBS += "libOpenCL.so:rockchip-libmali"
 ASSUME_SHLIBS += "libgbm.so:rockchip-libmali"
 ASSUME_SHLIBS += "libwayland-egl.so:rockchip-libmali"
-
-DEFAULTTUNE_rk3399="aarch64"

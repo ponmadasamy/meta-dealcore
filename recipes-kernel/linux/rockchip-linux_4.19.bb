@@ -3,7 +3,7 @@
 require recipes-kernel/linux/linux-yocto.inc
 inherit python3-dir
 
-LINUX_VERSION = "4.4"
+LINUX_VERSION = "4.19"
 KERNEL_VERSION_SANITY_SKIP = "1"
 
 DEPENDS += "openssl-native lz4-native ${PYTHON_PN}-native"
@@ -22,7 +22,11 @@ python () {
     d.setVar('KERNEL_IMAGETYPE_FOR_MAKE', ' ' + d.getVar('KERNEL_DEVICETREE').replace('rockchip/', '').replace('.dtb', '.img'));
 }
 
-SRC_URI = "git://${WORKSPACE}/kernel;protocol=file;usehead=1"
+
+LIC_FILES_CHKSUM = "file://COPYING;md5=bbea815ee2795b2f4230826c0c6b8814"
+
+# SRC_URI = "git://${WORKSPACE}/kernel-4.19;protocol=file;usehead=1"
+SRC_URI = "${DEALCORE_GIT}/rockchip-linux-4.19.git;branch=dealcore;"
 SRCREV = "${AUTOREV}"
 KBRANCH = "HEAD"
 
